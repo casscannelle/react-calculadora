@@ -8,10 +8,10 @@ const Calculator = () => {
 
   const handleClick = (e) => {
     if (result.length >= 12) {
-      setResult("Resultado muito grande");
+      setResult("Valor não suportado");
       setTimeout(() => {
         setResult("");
-      }, 500);
+      }, 2500);
       return;
     }
     if (result.charAt(0) === "0") {
@@ -41,7 +41,7 @@ const Calculator = () => {
       result = eval(result).toString();
       if (result.includes(".")) {
         result = +eval(result);
-        result = result.toFixed(4).toString();
+        result = result.toFixed(6).toString();
         setResult(result);
       } else {
         setResult(eval(result).toString());
