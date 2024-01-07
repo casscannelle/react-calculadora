@@ -63,6 +63,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 20px;
+    background-color: rgb(208, 220, 230);
   }
   
   button:hover{

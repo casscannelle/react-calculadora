@@ -27,11 +27,11 @@ const Calculator = () => {
   const handleKeyPress = (key) => {
     if (!isNaN(key) || key === '.') {
       handleClick({ target: { name: key } });
-    } else if (key === 'Backspace') {
+    } else if (key === 'backspace') {
       handleBackspace();
     } else if (key === '/' || key === '*' || key === '-' || key === '+') {
-        handleClick({ target: { name: key === 'return' ? 'Enter' : key } });
-    } else if (key === '13') {
+        handleClick({ target: { name: key === 'enter' ? 'return': key } });
+    } else if (key === 'enter') {
       calculate();
     }
   };
