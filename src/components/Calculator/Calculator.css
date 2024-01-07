@@ -1,7 +1,7 @@
 *{
     margin:0;
     padding: 0;
-    background-color: aliceblue;
+    background-color: rgb(240, 255, 241);
 }
 .container {
     width: 350px;
@@ -50,7 +50,7 @@
   
   .color {
     color: white;
-    background-color: #1bcedf;
+    background-color: #1bdf73;
     font-size: 20px;
     font-weight: 600;
   }
@@ -65,5 +65,5 @@
   }
   
   button:hover{
-    background-color:#bfe5e9;
+    background-color:#c9e9bf;
   }
