@@ -7,8 +7,8 @@ const Calculator = () => {
   let [result, setResult] = useState("");
 
   const handleClick = (e) => {
-    if (result.length >= 16) {
-      setResult("!Large Input");
+    if (result.length >= 12) {
+      setResult("Resultado muito grande");
       setTimeout(() => {
         setResult("");
       }, 500);
