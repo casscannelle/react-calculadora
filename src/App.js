@@ -1,63 +1,154 @@
-import './App.css';
-import { useState } from 'react';
+import React,{useState, useEffect} from 'react'
 
 function App() {
-  const [result, setResult] = useState('');
+  
+  const [valorDisplay,setValorDisplay]=useState('')
+  const [resultado,setResultado]=useState(0)
+  const [acumulador,setAcumulador]=useState(0)
+  const [operado,setOperado]=useState(false)
 
-  const handleClick = (e) => {
-    setResult(result.concat(e.target.name));
+  //Componentes
+  const Display=(valor, res)=>{
+    return(
+      <div style={cssDisplay}>
+        <span style={cssDisplayOper}>{valor}</span>
+        <span style={cssDisplayRes}>{res}</span>
+      </div>
+    )
   }
 
-  const clear = () => {
-    setResult("");
-  }
+  const Btn=(label, onClick)=>{
+    return(
+      <button style={cssBtn} onClick={onClick}>{label}</button>
+    )
 
-  const handleDelete = () => {
-    setResult(result.slice(0, -1));
   }
-
-  const calculate = () => {
-    try {
-      setResult(eval(result).toString());
-    } catch {
-      setResult("Erro")
+  //Funções
+  const addDigitoDisplay=(d)=>{
+    if((d==='+' || d==='-' || d==='*' || d==='/') && operado){
+      setOperado(false)
+      setValorDisplay(resultado+d)
+      return
     }
+    if(operado){
+      setValorDisplay(d)
+      setOperado(false)
+      return
+    }
+
+    const valorDigitadoDisplay=valorDisplay+d
+    setValorDisplay(valorDigitadoDisplay)
+  }
+
+    const limparDisplay=()=>{
+      setOperado(false)
+      setValorDisplay('')
+      setResultado(0)
+      setAcumulador(0)
+      return
+    }
+
+    const Operacao=(oper)=>{
+      if(oper==='bs'){
+        let vdisplay=valorDisplay
+        vdisplay=vdisplay.substring(0,(vdisplay.length-1))
+        setValorDisplay(vdisplay)
+        setOperado(false)
+        return
+      }
+      try{
+        const r=eval(valorDisplay)
+        setAcumulador(r)
+        setResultado(r)
+        setOperado(true)
+      }catch{
+        setResultado('Erro')
+      }
+    }
+
+
+  //CSS
+
+  const cssContainer={
+    display:'flex',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    flexDirection:'column',
+    width:300,
+    border:'1px solid #000'
+  }
+
+  const cssBotoes={
+    flexDirection:'row',
+    flexWrap:'wrap'
+  }
+  
+  const cssDisplay={
+    display:'flex',
+    paddingLeft:20,
+    paddingRight:20,
+    justifyContent:'center',
+    alignItems:'flex-start',
+    backgroundColor:'#fff',
+    flexDirection:'column',
+    width:260
+  }
+
+  const cssDisplayOper={
+    fontSize:25,
+    color:'#000',
+    height:20
+  }
+
+  const cssDisplayRes={
+    fontSize:50,
+    color:'#000'
+  }
+
+  const cssBtn={
+    fontSize:30,
+    height:75,
+    width:75,
+    padding:20,
+    backgroundColor:'#fff',
+    color:'#000',
+    borderColor:'#000',
+    textAlign:'center',
+    outline:'none'
   }
 
   return (
-    <div className="App">
-      <h1>Modern Calculator</h1>
+    <>
+    <div style={cssContainer}>
+      {Display(valorDisplay, resultado)}
+      <div style={cssBotoes}>
+        {Btn('AC', limparDisplay)}
+        {Btn('(',()=>addDigitoDisplay('('))}
+        {Btn(')',()=>addDigitoDisplay(')'))}
+        {Btn('÷',()=>addDigitoDisplay('/'))}
+        {Btn('7',()=>addDigitoDisplay('7'))}
+        {Btn('8',()=>addDigitoDisplay('8'))}
+        {Btn('9',()=>addDigitoDisplay('9'))}
+        {Btn('×',()=>addDigitoDisplay('*'))}
+        {Btn('4',()=>addDigitoDisplay('4'))}
+        {Btn('5',()=>addDigitoDisplay('5'))}
+        {Btn('6',()=>addDigitoDisplay('6'))}
+        {Btn('-',()=>addDigitoDisplay('-'))}
+        {Btn('1',()=>addDigitoDisplay('1'))}
+        {Btn('2',()=>addDigitoDisplay('2'))}
+        {Btn('3',()=>addDigitoDisplay('3'))}
+        {Btn('+',()=>addDigitoDisplay('+'))}
+        {Btn('0',()=>addDigitoDisplay('0'))}
+        {Btn('.',()=>addDigitoDisplay('.'))}
+        {Btn('←',()=>Operacao('bs'))}
+        {Btn('=',()=>Operacao('='))}
 
-      <div className='container'>
-        <form>
-          <input type="text" value={result} />
-        </form>
-
-        <div className='keypad'>
-          <button onClick={clear} id='clear' className='highlight'>AC</button>
-          <button onClick={handleDelete} className='highlight'>DEL</button>
-          <button name='/' onClick={handleClick} className='highlight'>&divide;</button>
-          <button name="7" onClick={handleClick}>7</button>
-          <button name="8" onClick={handleClick}>8</button>
-          <button name="9" onClick={handleClick}>9</button>
-          <button name="*" onClick={handleClick} className='highlight'>&times;</button>
-          <button name="4" onClick={handleClick}>4</button>
-          <button name="5" onClick={handleClick}>5</button>
-          <button name="6" onClick={handleClick}>6</button>
-          <button name="-" onClick={handleClick} className='highlight'>-</button>
-          <button name="1" onClick={handleClick}>1</button>
-          <button name="2" onClick={handleClick}>2</button>
-          <button name="3" onClick={handleClick}>3</button>
-          <button name="+" onClick={handleClick} className='highlight'>+</button>
-          <button name="0" onClick={handleClick}>0</button>
-          <button name="." onClick={handleClick}>.</button>
-          <button onClick={calculate} id='equal' className='highlight'>=</button>
-        </div>
 
       </div>
-
+      
     </div>
+    </>
   );
 }
 
-export default App;
+export default App
