@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState, useEffect } from 'react';
 import './App.css'
 
 function App() {
@@ -60,14 +60,14 @@ function App() {
       try{
         const r=eval(valorDisplay)
         setAcumulador(r)
-        setResultado(r)
+        setResultado(r.toFixed(5))
         setOperado(true)
       }catch{
         setResultado('Erro')
       }
     }
 
-
+  
   return (
   <>
     <div className='cssContainer'>
