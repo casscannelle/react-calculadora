@@ -1,4 +1,5 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState} from 'react';
+import './App.css'
 
 function App() {
   
@@ -10,16 +11,16 @@ function App() {
   //Componentes
   const Display=(valor, res)=>{
     return(
-      <div style={cssDisplay}>
-        <span style={cssDisplayOper}>{valor}</span>
-        <span style={cssDisplayRes}>{res}</span>
+      <div className='cssDisplay'>
+        <span className='cssDisplayOper'>{valor}</span>
+        <span className='cssDisplayRes'>{res}</span>
       </div>
     )
   }
 
   const Btn=(label, onClick)=>{
     return(
-      <button style={cssBtn} onClick={onClick}>{label}</button>
+      <button className='cssBtn' onClick={onClick}>{label}</button>
     )
 
   }
@@ -67,61 +68,11 @@ function App() {
     }
 
 
-  //CSS
-
-  const cssContainer={
-    display:'flex',
-    justifyContent:'flex-start',
-    alignItems:'center',
-    flexDirection:'column',
-    width:300,
-    border:'1px solid #000'
-  }
-
-  const cssBotoes={
-    flexDirection:'row',
-    flexWrap:'wrap'
-  }
-  
-  const cssDisplay={
-    display:'flex',
-    paddingLeft:20,
-    paddingRight:20,
-    justifyContent:'center',
-    alignItems:'flex-start',
-    backgroundColor:'#fff',
-    flexDirection:'column',
-    width:260
-  }
-
-  const cssDisplayOper={
-    fontSize:25,
-    color:'#000',
-    height:20
-  }
-
-  const cssDisplayRes={
-    fontSize:50,
-    color:'#000'
-  }
-
-  const cssBtn={
-    fontSize:30,
-    height:75,
-    width:75,
-    padding:20,
-    backgroundColor:'#fff',
-    color:'#000',
-    borderColor:'#000',
-    textAlign:'center',
-    outline:'none'
-  }
-
   return (
-    <>
-    <div style={cssContainer}>
+  <>
+    <div className='cssContainer'>
       {Display(valorDisplay, resultado)}
-      <div style={cssBotoes}>
+      <div className='cssBotoes'>
         {Btn('AC', limparDisplay)}
         {Btn('(',()=>addDigitoDisplay('('))}
         {Btn(')',()=>addDigitoDisplay(')'))}
@@ -142,12 +93,9 @@ function App() {
         {Btn('.',()=>addDigitoDisplay('.'))}
         {Btn('←',()=>Operacao('bs'))}
         {Btn('=',()=>Operacao('='))}
-
-
-      </div>
-      
+      </div> 
     </div>
-    </>
+  </>
   );
 }
 
