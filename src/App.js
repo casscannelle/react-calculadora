@@ -49,6 +49,7 @@ function App() {
         default:
           if (/^\d$/.test(key)) {
             addDigitoDisplay(key)
+          
           const valorDigitadoDisplay=valorDisplay+key
           setValorDisplay(valorDigitadoDisplay)
         }
