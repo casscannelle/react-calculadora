@@ -60,7 +60,7 @@ function App() {
       try{
         const r=eval(valorDisplay)
         setAcumulador(r)
-        setResultado(r.toFixed(5))
+        setResultado(r)
         setOperado(true)
       }catch{
         setResultado('Erro')
