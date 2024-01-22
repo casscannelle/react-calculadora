@@ -48,9 +48,13 @@ function App() {
           break;
         default:
           if (/^\d$/.test(key)) {
-            addDigitoDisplay(key);
-          }
-      }
+            addDigitoDisplay(key)
+          const valorDigitadoDisplay=valorDisplay+key
+          setValorDisplay(valorDigitadoDisplay)
+        }
+          
+        }
+        
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -59,6 +63,8 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [valorDisplay]);
+
+  
 
   const addDigitoDisplay=(d)=>{
     if((d==='+' || d==='-' || d==='*' || d==='/') && operado){
