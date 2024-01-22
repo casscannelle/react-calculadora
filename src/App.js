@@ -8,7 +8,8 @@ function App() {
   const [acumulador,setAcumulador]=useState(0)
   const [operado,setOperado]=useState(false)
 
-  //Componentes
+  
+
   const Display=(valor, res)=>{
     return(
       <div className='cssDisplay'>
@@ -24,7 +25,41 @@ function App() {
     )
 
   }
-  //Funções
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const key = event.key;
+
+      switch (key) {
+        case 'Enter':
+          Operacao('=');
+          break;
+        case 'Backspace':
+          Operacao('bs');
+          break;
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+          addDigitoDisplay(key);
+          break;
+        case '.':
+          addDigitoDisplay(key);
+          break;
+        default:
+          if (/^\d$/.test(key)) {
+            addDigitoDisplay(key);
+          }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [valorDisplay]);
+
   const addDigitoDisplay=(d)=>{
     if((d==='+' || d==='-' || d==='*' || d==='/') && operado){
       setOperado(false)
